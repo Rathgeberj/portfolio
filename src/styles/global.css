@@ -1,0 +1,145 @@
+/* ==========================================================================
+   rathgeberj.dev — global design system
+   Terminal/OS aesthetic: dark, green-on-black, JetBrains Mono throughout.
+   Color tokens are defined in tailwind.config.mjs (terminal.*).
+   ========================================================================== */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply bg-terminal-bg text-terminal-text font-mono;
+    scrollbar-color: #1f1f1f #0a0a0a;
+  }
+
+  body {
+    @apply min-h-screen bg-terminal-bg text-terminal-text antialiased;
+  }
+
+  ::selection {
+    background-color: rgba(0, 255, 65, 0.25);
+    color: #e0e0e0;
+  }
+
+  a {
+    @apply transition-colors duration-150;
+  }
+
+  /* Visible focus ring for keyboard navigation */
+  :focus-visible {
+    @apply outline-none ring-1 ring-terminal-green;
+  }
+}
+
+@layer components {
+  /* --- Panels / cards ----------------------------------------------------- */
+  .panel {
+    @apply bg-terminal-surface border border-terminal-border rounded-sm;
+  }
+
+  .panel-interactive {
+    @apply panel transition-all duration-200;
+  }
+
+  .panel-interactive:hover,
+  .panel-interactive:focus-within {
+    @apply border-terminal-green shadow-glow-green-sm;
+  }
+
+  /* --- Section labels: styled like terminal comments ---------------------- */
+  /* Usage: <h2 class="section-label">EXPERIENCE</h2> → renders "// EXPERIENCE" */
+  .section-label {
+    @apply text-terminal-green text-sm tracking-widest uppercase;
+  }
+
+  .section-label::before {
+    content: '// ';
+    @apply text-terminal-muted;
+  }
+
+  /* --- Prompt lists: "> " bullet marker ----------------------------------- */
+  .prompt-list {
+    @apply list-none space-y-1.5;
+  }
+
+  .prompt-list > li {
+    @apply pl-5 relative;
+  }
+
+  .prompt-list > li::before {
+    content: '>';
+    @apply absolute left-0 text-terminal-green;
+  }
+
+  /* --- Status dots --------------------------------------------------------- */
+  /* green = active/current/earned, grey = past/completed, red = in progress */
+  .status-dot {
+    @apply inline-block w-2 h-2 rounded-full align-middle;
+  }
+
+  .status-dot-green {
+    @apply status-dot bg-terminal-green animate-pulse-dot;
+  }
+
+  .status-dot-grey {
+    @apply status-dot bg-terminal-muted;
+  }
+
+  .status-dot-red {
+    @apply status-dot bg-terminal-red;
+  }
+
+  /* --- Blinking cursor ------------------------------------------------------ */
+  /* Usage: <span class="cursor-blink"></span> after hero name/tagline */
+  .cursor-blink::after {
+    content: '|';
+    @apply text-terminal-green animate-blink;
+  }
+
+  /* --- Terminal prompt prefix ----------------------------------------------- */
+  /* Usage: <span class="prompt-prefix"></span> → "jeff@rathgeberj:~$" */
+  .prompt-prefix::before {
+    content: 'jeff@rathgeberj:~$';
+    @apply text-terminal-green;
+  }
+
+  /* --- Skill / tag badges ---------------------------------------------------- */
+  .tag-badge {
+    @apply inline-block px-2 py-0.5 text-xs border border-terminal-border bg-terminal-bg
+      text-terminal-text rounded-sm transition-all duration-150;
+  }
+
+  .tag-badge:hover {
+    @apply border-terminal-green text-terminal-green shadow-glow-green-sm;
+  }
+}
+
+@layer utilities {
+  /* --- Scanline overlay (CSS-only, lightweight) ------------------------------ */
+  /* Apply to a relatively-positioned container, e.g. the hero section */
+  .scanlines::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 2px,
+      rgba(0, 0, 0, 0.18) 3px,
+      transparent 4px
+    );
+  }
+
+  /* Respect users who prefer reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-blink,
+    .animate-pulse-dot,
+    .animate-fade-in,
+    .cursor-blink::after {
+      animation: none !important;
+    }
+  }
+}
