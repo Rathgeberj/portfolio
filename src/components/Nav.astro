@@ -71,12 +71,12 @@ const breadcrumb = currentPath === '/' ? '~' : `~${currentPath}`;
       <span class="text-terminal-accent">&gt;</span> pwd: {breadcrumb}
     </div>
   </nav>
+</header>
 
-  <!-- Mobile full-screen overlay -->
-  <div
-    id="nav-overlay"
-    class="hidden md:hidden fixed inset-0 z-50 bg-terminal-bg/98 backdrop-blur-sm"
-  >
+<!-- Mobile full-screen overlay. Lives OUTSIDE <header>: its backdrop-filter
+     would otherwise become the containing block for this fixed element,
+     shrinking it to the header bar instead of the viewport. -->
+<div id="nav-overlay" class="hidden md:hidden fixed inset-0 z-50 overflow-y-auto">
     <div class="flex items-center justify-between h-12 px-4 border-b border-terminal-border text-sm">
       <span class="text-terminal-accent">jeff@rathgeberj:~$</span>
       <button
@@ -88,7 +88,7 @@ const breadcrumb = currentPath === '/' ? '~' : `~${currentPath}`;
         ✕
       </button>
     </div>
-    <ul class="flex flex-col gap-2 p-6 text-lg">
+    <ul class="flex flex-col gap-2 p-8 text-lg">
       {
         links.map((link) => (
           <li>
@@ -96,10 +96,10 @@ const breadcrumb = currentPath === '/' ? '~' : `~${currentPath}`;
               href={link.href}
               aria-current={isActive(link.href) ? 'page' : undefined}
               class:list={[
-                'block px-3 py-2 rounded-sm border',
+                'block px-4 py-2.5 rounded-sm border text-terminal-accent',
                 isActive(link.href)
-                  ? 'text-terminal-accent border-terminal-accent/40 shadow-glow-accent-sm'
-                  : 'text-terminal-text border-transparent hover:border-terminal-border',
+                  ? 'border-terminal-accent/40 bg-terminal-surface-accent shadow-glow-accent-sm'
+                  : 'border-transparent hover:border-terminal-border',
               ]}
             >
               <span class="text-terminal-muted">&gt;</span> [{link.label}]
@@ -108,8 +108,15 @@ const breadcrumb = currentPath === '/' ? '~' : `~${currentPath}`;
         ))
       }
     </ul>
-  </div>
-</header>
+</div>
+
+<style>
+  /* Solid opaque backdrop for the mobile nav — defined on the ID so no
+     utility-generation or specificity quirk can ever leave it transparent */
+  #nav-overlay {
+    background-color: #111111;
+  }
+</style>
 
 <script>
   const toggle = document.getElementById('nav-toggle');

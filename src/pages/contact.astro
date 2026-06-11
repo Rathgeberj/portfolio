@@ -1,0 +1,45 @@
+---
+// Contact — clean and minimal, styled as a terminal output block.
+// All content from src/data/contact.ts.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { contact } from '../data/contact';
+---
+
+<BaseLayout
+  title="contact"
+  description="Contact Jeffrey Rathgeber Jr. — email, LinkedIn, and GitHub. Based in New York, NY."
+>
+  <div class="max-w-[800px] mx-auto">
+    <h2 class="section-label">CONTACT</h2>
+    <p class="mt-2 mb-8 text-sm text-terminal-muted">
+      <span class="text-terminal-accent">&gt;</span> cat contact.txt
+    </p>
+
+    <div class="panel p-6 sm:p-8">
+      <ul class="space-y-3 text-sm sm:text-base">
+        {
+          contact.map((item) => (
+            <li>
+              <span class="text-terminal-accent" aria-hidden="true">
+                &gt;{' '}
+              </span>
+              <span class="text-terminal-muted">{item.label}:</span>{' '}
+              {item.url ? (
+                <a
+                  href={item.url}
+                  target={item.url.startsWith('http') ? '_blank' : undefined}
+                  rel={item.url.startsWith('http') ? 'noopener noreferrer' : undefined}
+                  class="text-terminal-text transition-colors hover:text-terminal-accent"
+                >
+                  {item.value}
+                </a>
+              ) : (
+                <span class="text-terminal-text">{item.value}</span>
+              )}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</BaseLayout>

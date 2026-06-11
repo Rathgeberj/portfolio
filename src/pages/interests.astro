@@ -1,0 +1,37 @@
+---
+// Personal interests — light and casual, a brief human moment.
+// All content from src/data/interests.ts.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { interests, interestsIntro } from '../data/interests';
+---
+
+<BaseLayout
+  title="interests"
+  description="Personal interests of Jeffrey Rathgeber Jr. — chess, soccer, reading, and horology."
+>
+  <div class="max-w-[800px] mx-auto">
+    <h2 class="section-label">INTERESTS</h2>
+    <p class="mt-2 mb-10 text-sm text-terminal-muted">
+      <span class="text-terminal-accent">&gt;</span>
+      {interestsIntro}
+    </p>
+
+    <div class="grid gap-4 sm:grid-cols-2">
+      {
+        interests.map((interest) => (
+          <article class="panel-interactive p-5">
+            <h3 class="text-terminal-text">
+              <span class="text-terminal-accent" aria-hidden="true">
+                &gt;{' '}
+              </span>
+              {interest.name}
+            </h3>
+            {interest.note && (
+              <p class="mt-2 text-sm leading-relaxed text-terminal-muted">{interest.note}</p>
+            )}
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,41 @@
+---
+// Organizations & community — card grid, all content from src/data/organizations.ts.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { organizations } from '../data/organizations';
+---
+
+<BaseLayout
+  title="organizations"
+  description="Organizations and community memberships of Jeffrey Rathgeber Jr. — (ISC)², ISACA, OSIRIS Lab, and more."
+>
+  <div class="max-w-[800px] mx-auto">
+    <h2 class="section-label">ORGANIZATIONS</h2>
+    <p class="mt-2 mb-8 text-sm text-terminal-muted">
+      <span class="text-terminal-accent">&gt;</span> ls ~/orgs --memberships
+    </p>
+
+    <div class="grid gap-5 sm:grid-cols-2">
+      {
+        organizations.map((org) => (
+          <article class="panel flex flex-col p-5">
+            <h3 class="font-bold leading-snug text-terminal-accent">{org.name}</h3>
+            <p class="mt-0.5 text-xs uppercase tracking-widest text-terminal-muted">{org.role}</p>
+            <p class="mt-3 text-sm leading-relaxed text-terminal-text/90">{org.description}</p>
+            {org.url && (
+              <p class="mt-auto pt-4 text-sm">
+                <a
+                  href={org.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-terminal-muted transition-colors hover:text-terminal-accent"
+                >
+                  <span class="text-terminal-accent">&gt;</span> visit site ↗
+                </a>
+              </p>
+            )}
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</BaseLayout>
