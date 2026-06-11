@@ -26,9 +26,9 @@ export const experience: ExperienceEntry[] = [
   {
     title: 'IT/Cybersecurity Instructor',
     organization: "I'Raise Girls & Boys International",
-    dateRange: 'April 2025 – Present',
+    dateRange: 'April 2025 – November 2025',
     location: 'New York, NY',
-    status: 'current',
+    status: 'past',
     bullets: [
       'Design engaging lessons and technical workshops on IT & Cybersecurity fundamentals',
       'Tailor instruction to diverse learning styles',

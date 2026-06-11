@@ -1,0 +1,46 @@
+---
+// One job entry on /experience, rendered as a distinct card.
+// Left accent bar reinforces the timeline: purple = current role, grey = past.
+import type { ExperienceEntry } from '../data/experience';
+
+interface Props {
+  entry: ExperienceEntry;
+}
+
+const { entry } = Astro.props;
+const isCurrent = entry.status === 'current';
+---
+
+<article
+  class:list={[
+    'rounded-sm border-l-4 p-5 sm:p-6',
+    isCurrent
+      ? 'bg-terminal-accent/10 border-l-terminal-accent'
+      : 'bg-terminal-surface/50 border-l-terminal-muted',
+  ]}
+>
+  <h3 class="text-terminal-accent font-bold text-lg leading-snug">{entry.title}</h3>
+  <p class="mt-0.5 text-terminal-text">{entry.organization}</p>
+
+  <p class="mt-2 flex flex-wrap items-center gap-x-2 text-xs text-terminal-muted">
+    <span
+      class={isCurrent ? 'status-dot-accent' : 'status-dot-grey'}
+      aria-hidden="true"></span>
+    <span>{entry.dateRange}</span>
+    <span aria-hidden="true">|</span>
+    <span>{entry.location}</span>
+    <span aria-hidden="true">|</span>
+    <span
+      class:list={[
+        'uppercase tracking-widest',
+        isCurrent ? 'text-terminal-accent' : 'text-terminal-muted',
+      ]}
+    >
+      {isCurrent ? 'current' : 'past'}
+    </span>
+  </p>
+
+  <ul class="prompt-list mt-4 text-sm text-terminal-text/90">
+    {entry.bullets.map((bullet) => <li>{bullet}</li>)}
+  </ul>
+</article>

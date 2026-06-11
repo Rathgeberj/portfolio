@@ -1,0 +1,23 @@
+---
+// Work Experience — vertical timeline, most recent first.
+// All content comes from src/data/experience.ts.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ExperienceEntry from '../components/ExperienceEntry.astro';
+import { experience } from '../data/experience';
+---
+
+<BaseLayout
+  title="experience"
+  description="Work experience of Jeffrey Rathgeber Jr. — IT infrastructure, cybersecurity instruction, and security research roles."
+>
+  <div class="max-w-[800px] mx-auto">
+    <h2 class="section-label">EXPERIENCE</h2>
+    <p class="mt-2 mb-8 text-sm text-terminal-muted">
+      <span class="text-terminal-accent">&gt;</span> cat work_history.log --reverse
+    </p>
+
+    <div class="space-y-12">
+      {experience.map((entry) => <ExperienceEntry entry={entry} />)}
+    </div>
+  </div>
+</BaseLayout>
