@@ -1,0 +1,39 @@
+---
+// Core Competencies — skills grouped by domain, rendered as terminal-token
+// badges (no progress bars). All content from src/data/competencies.ts.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SkillTag from '../components/SkillTag.astro';
+import { competencies } from '../data/competencies';
+---
+
+<BaseLayout
+  title="competencies"
+  description="Core competencies of Jeffrey Rathgeber Jr. — languages, security tools, infrastructure, and research domains."
+>
+  <div class="max-w-[800px] mx-auto">
+    <h2 class="section-label">CORE COMPETENCIES</h2>
+    <p class="mt-2 mb-8 text-sm text-terminal-muted">
+      <span class="text-terminal-accent">&gt;</span> cat skills.cfg --group-by=domain
+    </p>
+
+    <div class="grid gap-5 sm:grid-cols-2">
+      {
+        competencies.map((group) => (
+          <section class="panel p-5" aria-label={group.category}>
+            <h3 class="text-sm font-bold uppercase tracking-widest text-terminal-accent">
+              <span class="text-terminal-muted" aria-hidden="true">
+                &gt;{' '}
+              </span>
+              {group.category}
+            </h3>
+            <div class="mt-3 flex flex-wrap gap-1.5">
+              {group.skills.map((skill) => (
+                <SkillTag label={skill} />
+              ))}
+            </div>
+          </section>
+        ))
+      }
+    </div>
+  </div>
+</BaseLayout>

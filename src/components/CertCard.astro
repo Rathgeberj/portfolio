@@ -1,0 +1,52 @@
+---
+// One certification card on /certifications.
+// Accent (purple) = earned, red = in progress/pursuing — per the CLAUDE.md
+// palette, the accent color fills the "green = done" role from the spec.
+import type { Certification } from '../data/certifications';
+
+interface Props {
+  cert: Certification;
+}
+
+const { cert } = Astro.props;
+const earned = cert.status === 'earned';
+---
+
+<article
+  class:list={[
+    'panel border-l-4 p-5',
+    earned ? 'border-l-terminal-accent' : 'border-l-terminal-red',
+  ]}
+>
+  <h3 class="font-bold leading-snug text-terminal-accent">{cert.name}</h3>
+  <p class="mt-0.5 text-sm text-terminal-text">{cert.organization}</p>
+
+  <p class="mt-2 flex flex-wrap items-center gap-x-2 text-xs text-terminal-muted">
+    <span class={earned ? 'status-dot-accent' : 'status-dot-red'} aria-hidden="true"></span>
+    <span>{cert.date}</span>
+    <span aria-hidden="true">|</span>
+    <span
+      class:list={[
+        'uppercase tracking-widest',
+        earned ? 'text-terminal-accent' : 'text-terminal-red',
+      ]}
+    >
+      {earned ? 'earned' : 'in progress'}
+    </span>
+  </p>
+
+  {
+    cert.verificationUrl && (
+      <p class="mt-3 text-sm">
+        <a
+          href={cert.verificationUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-terminal-muted transition-colors hover:text-terminal-accent"
+        >
+          <span class="text-terminal-accent">&gt;</span> verify credential ↗
+        </a>
+      </p>
+    )
+  }
+</article>

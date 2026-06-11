@@ -19,20 +19,21 @@ export const certifications: Certification[] = [
     verificationUrl: '#', // [PLACEHOLDER] verification link
   },
   {
-    name: '[Cert name TBD]',
-    organization: '[Org TBD]',
+    name: 'Splunk Core Certified Power User',
+    organization: 'Splunk',
+    date: '[TBD]', // [PLACEHOLDER] date earned
+    status: 'earned',
+    verificationUrl: '#', // [PLACEHOLDER] verification link
+  },
+  {
+    name: 'Microsoft Azure Fundamentals (AZ-900)',
+    organization: 'Microsoft',
     date: 'Pursuing',
     status: 'in-progress',
   },
   {
-    name: '[Cert name TBD]',
-    organization: '[Org TBD]',
-    date: 'Pursuing',
-    status: 'in-progress',
-  },
-  {
-    name: '[Cert name TBD]',
-    organization: '[Org TBD]',
+    name: 'CompTIA A+',
+    organization: 'CompTIA',
     date: 'Pursuing',
     status: 'in-progress',
   },

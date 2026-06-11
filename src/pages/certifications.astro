@@ -1,0 +1,36 @@
+---
+// Certifications — grid of cert cards, all content from src/data/certifications.ts.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CertCard from '../components/CertCard.astro';
+import { certifications } from '../data/certifications';
+
+const earned = certifications.filter((c) => c.status === 'earned');
+const pursuing = certifications.filter((c) => c.status === 'in-progress');
+---
+
+<BaseLayout
+  title="certifications"
+  description="Certifications of Jeffrey Rathgeber Jr. — Google Cybersecurity, Splunk Power User, and certifications in progress."
+>
+  <div class="max-w-[800px] mx-auto">
+    <h2 class="section-label">CERTIFICATIONS</h2>
+
+    <section aria-label="Earned certifications">
+      <p class="mt-2 mb-6 text-sm text-terminal-muted">
+        <span class="text-terminal-accent">&gt;</span> ls ~/certs --earned
+      </p>
+      <div class="grid gap-5 sm:grid-cols-2">
+        {earned.map((cert) => <CertCard cert={cert} />)}
+      </div>
+    </section>
+
+    <section aria-label="Certifications in progress" class="mt-12">
+      <p class="mb-6 text-sm text-terminal-muted">
+        <span class="text-terminal-accent">&gt;</span> ls ~/certs --pursuing
+      </p>
+      <div class="grid gap-5 sm:grid-cols-2">
+        {pursuing.map((cert) => <CertCard cert={cert} />)}
+      </div>
+    </section>
+  </div>
+</BaseLayout>
