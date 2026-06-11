@@ -1,0 +1,22 @@
+---
+// Projects index — grid of project cards, all content from src/data/projects.ts.
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { projects } from '../../data/projects';
+---
+
+<BaseLayout
+  title="projects"
+  description="Projects by Jeffrey Rathgeber Jr. — homelab infrastructure, applied cryptography, security research, and full-stack builds."
+>
+  <div class="max-w-[800px] mx-auto">
+    <h2 class="section-label">PROJECTS</h2>
+    <p class="mt-2 mb-8 text-sm text-terminal-muted">
+      <span class="text-terminal-accent">&gt;</span> ls ~/projects --sort=date
+    </p>
+
+    <div class="grid gap-5 sm:grid-cols-2">
+      {projects.map((project) => <ProjectCard project={project} />)}
+    </div>
+  </div>
+</BaseLayout>

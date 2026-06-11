@@ -1,0 +1,80 @@
+---
+// Project detail page ("deep dive"). A page is generated for every project in
+// src/data/projects.ts that has a `deepDive` — currently the Homelab demo.
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SkillTag from '../../components/SkillTag.astro';
+import { projects } from '../../data/projects';
+
+export function getStaticPaths() {
+  return projects
+    .filter((p) => p.deepDive)
+    .map((p) => ({ params: { slug: p.slug }, props: { project: p } }));
+}
+
+const { project } = Astro.props;
+const deepDive = project.deepDive!;
+---
+
+<BaseLayout title={project.name} description={project.summary}>
+  <div class="max-w-[800px] mx-auto">
+    <p class="mb-6 text-sm">
+      <a href="/projects" class="text-terminal-muted hover:text-terminal-accent">
+        <span class="text-terminal-accent">&gt;</span> cd ../projects
+      </a>
+    </p>
+
+    <header class="panel border-l-4 border-l-terminal-accent p-5 sm:p-6">
+      <h1 class="text-2xl font-bold leading-snug text-terminal-accent">{project.name}</h1>
+      <p class="mt-1 text-xs text-terminal-muted">
+        {project.date} · {project.tags.map((t) => `[${t}]`).join(' ')}
+      </p>
+      <p class="mt-3 text-sm leading-relaxed text-terminal-text/90">{project.summary}</p>
+
+      <div class="mt-4 flex flex-wrap gap-1.5">
+        {project.techStack.map((tech) => <SkillTag label={tech} />)}
+      </div>
+    </header>
+
+    {
+      deepDive.sections.map((section) => (
+        <section class="mt-10">
+          <h2 class="section-label">{section.heading}</h2>
+          <div class="mt-3 space-y-3">
+            {section.body.map((paragraph) => (
+              <p class="text-sm leading-relaxed text-terminal-text/90">{paragraph}</p>
+            ))}
+          </div>
+          {section.heading === 'Technologies Used' && (
+            <div class="mt-4 flex flex-wrap gap-1.5">
+              {project.techStack.map((tech) => (
+                <SkillTag label={tech} />
+              ))}
+            </div>
+          )}
+        </section>
+      ))
+    }
+
+    {
+      deepDive.links && deepDive.links.length > 0 && (
+        <section class="mt-10">
+          <h2 class="section-label">Links</h2>
+          <ul class="prompt-list mt-3 text-sm">
+            {deepDive.links.map((link) => (
+              <li>
+                <a
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-terminal-accent hover:underline"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+  </div>
+</BaseLayout>

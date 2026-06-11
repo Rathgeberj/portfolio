@@ -1,0 +1,11 @@
+---
+// Terminal-token badge for a single technology/skill, e.g. [Python].
+// Reused on project cards, project detail pages, and /competencies.
+interface Props {
+  label: string;
+}
+
+const { label } = Astro.props;
+---
+
+<span class="tag-badge">[{label}]</span>
