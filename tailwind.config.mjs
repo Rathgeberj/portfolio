@@ -35,11 +35,16 @@ export default {
           from: { opacity: '0', transform: 'translateY(8px)' },
           to: { opacity: '1', transform: 'translateY(0)' },
         },
+        marquee: {
+          from: { transform: 'translateX(0)' },
+          to: { transform: 'translateX(-50%)' },
+        },
       },
       animation: {
         blink: 'blink 1.1s step-end infinite',
         'pulse-dot': 'pulse-dot 2s ease-in-out infinite',
         'fade-in': 'fade-in 0.4s ease-out both',
+        marquee: 'marquee 30s linear infinite',
       },
     },
   },

@@ -1,0 +1,25 @@
+---
+// Bottom status bar: scrolling fake log line. CSS-only marquee — the line is
+// duplicated and translated -50% so the loop is seamless.
+
+const buildDate = new Date().toISOString().slice(0, 10);
+
+const logLine = [
+  '> Loading modules... OK',
+  'System: ONLINE',
+  `Last updated: ${buildDate}`,
+  'Threat level: GREEN',
+  'All sections operational',
+].join('  |  ');
+---
+
+<div
+  class="panel mt-6 overflow-hidden text-xs text-terminal-muted select-none"
+  role="presentation"
+  aria-hidden="true"
+>
+  <div class="flex w-max animate-marquee whitespace-nowrap py-1.5">
+    <span class="px-4">{logLine}</span>
+    <span class="px-4">{logLine}</span>
+  </div>
+</div>

@@ -1,20 +1,113 @@
 ---
-// [PLACEHOLDER] Temporary stub to verify the foundation builds.
-// Will be replaced by the Landing Dashboard (profile panel + module grid)
-// in the page-by-page build phase.
+// Landing Dashboard — OS-style home. Profile panel (left) + section module grid (right).
+// Module previews are derived from src/data/ so they stay in sync with content.
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ProfilePanel from '../components/ProfilePanel.astro';
+import StatusBar from '../components/StatusBar.astro';
+import { projects } from '../data/projects';
+import { experience } from '../data/experience';
+import { education } from '../data/education';
+import { certifications } from '../data/certifications';
+import { competencies } from '../data/competencies';
+import { organizations } from '../data/organizations';
+import { interests } from '../data/interests';
+
+const featured = projects.find((p) => p.featured);
+const earned = certifications.filter((c) => c.status === 'earned').length;
+const pursuing = certifications.filter((c) => c.status === 'in-progress').length;
+const skillSample = competencies[0].skills.slice(0, 4).join(', ');
+
+const modules = [
+  {
+    label: 'EXPERIENCE',
+    href: '/experience',
+    preview: `${experience[0].title} — ${experience[0].organization}`,
+  },
+  {
+    label: 'EDUCATION',
+    href: '/education',
+    preview: `${education[0].degree} — ${education[0].institution}`,
+  },
+  {
+    label: 'PROJECTS',
+    href: '/projects',
+    preview: `${projects.length} projects loaded · featured: ${featured?.name}`,
+  },
+  {
+    label: 'CERTIFICATIONS',
+    href: '/certifications',
+    preview: `${earned} earned · ${pursuing} in progress`,
+  },
+  {
+    label: 'CORE COMPETENCIES',
+    href: '/competencies',
+    preview: `${skillSample}, ...`,
+  },
+  {
+    label: 'ORGANIZATIONS',
+    href: '/organizations',
+    preview: `${organizations.length} memberships · (ISC)², ISACA, OSIRIS Lab, ...`,
+  },
+  {
+    label: 'INTERESTS',
+    href: '/interests',
+    preview: interests.map((i) => `${i.icon} ${i.name}`).join(' · '),
+  },
+  {
+    label: 'CONTACT',
+    href: '/contact',
+    preview: 'jeff@rathgeberj.dev · LinkedIn · GitHub', // [PLACEHOLDER] email
+  },
+];
+
+// Fake "last login" — stamped at build time
+const lastLogin = new Date().toUTCString().replace('GMT', 'UTC');
 ---
 
 <BaseLayout title="~">
-  <section class="panel relative scanlines p-6 sm:p-10">
-    <h2 class="section-label mb-4">SYSTEM</h2>
-    <h1 class="text-2xl sm:text-4xl font-bold">
-      Jeffrey Rathgeber Jr.<span class="cursor-blink" aria-hidden="true"></span>
-    </h1>
-    <p class="mt-4 text-terminal-muted">
-      <span class="text-terminal-green">&gt;</span> Foundation scaffolded. Landing dashboard coming next.
-      <span class="status-dot-green ml-2" aria-hidden="true"></span>
-      <span class="text-xs uppercase tracking-widest ml-1">online</span>
-    </p>
-  </section>
+  <!-- OS title bar -->
+  <div class="panel relative scanlines px-4 py-2.5 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm">
+    <span class="flex gap-1.5" aria-hidden="true">
+      <span class="w-2.5 h-2.5 rounded-full bg-terminal-red/80"></span>
+      <span class="w-2.5 h-2.5 rounded-full bg-terminal-muted/60"></span>
+      <span class="w-2.5 h-2.5 rounded-full bg-terminal-green/80"></span>
+    </span>
+    <span class="text-terminal-green">
+      jeff@rathgeberj.dev<span class="cursor-blink" aria-hidden="true"></span>
+    </span>
+    <span class="ml-auto text-xs text-terminal-muted">last login: {lastLogin}</span>
+  </div>
+
+  <div class="mt-6 grid gap-6 lg:grid-cols-3">
+    <!-- Left column: profile -->
+    <ProfilePanel />
+
+    <!-- Right column: section module grid -->
+    <section class="lg:col-span-2" aria-label="Site sections">
+      <h2 class="section-label mb-4">MODULES</h2>
+      <div class="grid gap-4 sm:grid-cols-2">
+        {
+          modules.map((mod) => (
+            <a href={mod.href} class="panel-interactive group block p-4">
+              <div class="flex items-center justify-between">
+                <span class="text-terminal-green font-bold tracking-wide">[{mod.label}]</span>
+                <span
+                  class="text-terminal-muted group-hover:text-terminal-green transition-colors duration-150"
+                  aria-hidden="true"
+                >
+                  &gt;_
+                </span>
+              </div>
+              <p class="mt-2 text-xs text-terminal-muted leading-relaxed line-clamp-2">
+                {mod.preview}
+              </p>
+            </a>
+          ))
+        }
+      </div>
+    </section>
+  </div>
+
+  <!-- Bottom status bar: scrolling fake log line -->
+  <StatusBar />
 </BaseLayout>

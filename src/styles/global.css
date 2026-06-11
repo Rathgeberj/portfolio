@@ -138,6 +138,7 @@
     .animate-blink,
     .animate-pulse-dot,
     .animate-fade-in,
+    .animate-marquee,
     .cursor-blink::after {
       animation: none !important;
     }
