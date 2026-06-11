@@ -32,14 +32,14 @@ const quickLinks = [
     alt="Profile photo of Jeffrey Rathgeber Jr. (placeholder)"
     width="144"
     height="144"
-    class="w-36 h-36 rounded-full ring-2 ring-terminal-green/70 shadow-glow-green-sm"
+    class="w-36 h-36 rounded-full ring-2 ring-terminal-accent/70 shadow-glow-accent-sm"
   />
 
   <h1 class="mt-5 text-xl font-bold text-terminal-text">
     Jeffrey Rathgeber Jr.
   </h1>
 
-  <p class="mt-1 h-6 text-terminal-green text-sm" aria-label={taglines.join(', ')}>
+  <p class="mt-1 h-6 text-terminal-accent text-sm" aria-label={taglines.join(', ')}>
     <span id="typewriter" data-phrases={JSON.stringify(taglines)} aria-hidden="true"
       >{taglines[0]}</span
     ><span class="cursor-blink" aria-hidden="true"></span>
@@ -62,7 +62,7 @@ const quickLinks = [
             rel={link.url.startsWith('http') ? 'noopener noreferrer' : undefined}
             aria-label={link.label}
             title={link.label}
-            class="block p-2 border border-terminal-border rounded-sm text-terminal-muted hover:text-terminal-green hover:border-terminal-green hover:shadow-glow-green-sm transition-all duration-150"
+            class="block p-2 border border-terminal-border rounded-sm text-terminal-muted hover:text-terminal-accent hover:border-terminal-accent hover:shadow-glow-accent-sm transition-all duration-150"
           >
             <svg viewBox="0 0 24 24" class="w-5 h-5 fill-current" aria-hidden="true">
               <path d={link.icon} />

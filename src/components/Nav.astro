@@ -27,7 +27,7 @@ const breadcrumb = currentPath === '/' ? '~' : `~${currentPath}`;
 <header class="sticky top-0 z-40 bg-terminal-bg/95 backdrop-blur-sm border-b border-terminal-border">
   <nav aria-label="Main navigation" class="max-w-6xl mx-auto px-4 sm:px-6">
     <div class="flex items-center justify-between h-12 text-sm">
-      <a href="/" class="text-terminal-green whitespace-nowrap hover:text-terminal-text">
+      <a href="/" class="text-terminal-accent whitespace-nowrap hover:text-terminal-text">
         jeff@rathgeberj:~$<span class="cursor-blink" aria-hidden="true"></span>
       </a>
 
@@ -42,7 +42,7 @@ const breadcrumb = currentPath === '/' ? '~' : `~${currentPath}`;
                 class:list={[
                   'px-2 py-1 rounded-sm',
                   isActive(link.href)
-                    ? 'text-terminal-green border border-terminal-green/40 shadow-glow-green-sm'
+                    ? 'text-terminal-accent border border-terminal-accent/40 shadow-glow-accent-sm'
                     : 'text-terminal-muted hover:text-terminal-text',
                 ]}
               >
@@ -57,7 +57,7 @@ const breadcrumb = currentPath === '/' ? '~' : `~${currentPath}`;
       <button
         id="nav-toggle"
         type="button"
-        class="md:hidden px-2 py-1 text-terminal-green border border-terminal-border rounded-sm"
+        class="md:hidden px-2 py-1 text-terminal-accent border border-terminal-border rounded-sm"
         aria-expanded="false"
         aria-controls="nav-overlay"
         aria-label="Open navigation menu"
@@ -68,7 +68,7 @@ const breadcrumb = currentPath === '/' ? '~' : `~${currentPath}`;
 
     <!-- Breadcrumb: current route as terminal path -->
     <div class="pb-1.5 text-xs text-terminal-muted" aria-label="Breadcrumb">
-      <span class="text-terminal-green">&gt;</span> pwd: {breadcrumb}
+      <span class="text-terminal-accent">&gt;</span> pwd: {breadcrumb}
     </div>
   </nav>
 
@@ -78,7 +78,7 @@ const breadcrumb = currentPath === '/' ? '~' : `~${currentPath}`;
     class="hidden md:hidden fixed inset-0 z-50 bg-terminal-bg/98 backdrop-blur-sm"
   >
     <div class="flex items-center justify-between h-12 px-4 border-b border-terminal-border text-sm">
-      <span class="text-terminal-green">jeff@rathgeberj:~$</span>
+      <span class="text-terminal-accent">jeff@rathgeberj:~$</span>
       <button
         id="nav-close"
         type="button"
@@ -98,7 +98,7 @@ const breadcrumb = currentPath === '/' ? '~' : `~${currentPath}`;
               class:list={[
                 'block px-3 py-2 rounded-sm border',
                 isActive(link.href)
-                  ? 'text-terminal-green border-terminal-green/40 shadow-glow-green-sm'
+                  ? 'text-terminal-accent border-terminal-accent/40 shadow-glow-accent-sm'
                   : 'text-terminal-text border-transparent hover:border-terminal-border',
               ]}
             >

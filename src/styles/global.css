@@ -1,6 +1,7 @@
 /* ==========================================================================
    rathgeberj.dev — global design system
-   Terminal/OS aesthetic: dark, green-on-black, JetBrains Mono throughout.
+   Terminal/OS aesthetic: dark, purple-on-black UI with green matrix rain,
+   JetBrains Mono throughout.
    Color tokens are defined in tailwind.config.mjs (terminal.*).
    ========================================================================== */
 
@@ -14,12 +15,14 @@
     scrollbar-color: #1f1f1f #0a0a0a;
   }
 
+  /* Background lives on <html> only — body stays transparent so the
+     MatrixRain canvas (z-index: -1) is visible behind content */
   body {
-    @apply min-h-screen bg-terminal-bg text-terminal-text antialiased;
+    @apply min-h-screen text-terminal-text antialiased;
   }
 
   ::selection {
-    background-color: rgba(0, 255, 65, 0.25);
+    background-color: rgba(157, 0, 255, 0.25);
     color: #e0e0e0;
   }
 
@@ -29,7 +32,7 @@
 
   /* Visible focus ring for keyboard navigation */
   :focus-visible {
-    @apply outline-none ring-1 ring-terminal-green;
+    @apply outline-none ring-1 ring-terminal-accent;
   }
 }
 
@@ -45,13 +48,13 @@
 
   .panel-interactive:hover,
   .panel-interactive:focus-within {
-    @apply border-terminal-green shadow-glow-green-sm;
+    @apply border-terminal-accent shadow-glow-accent-sm;
   }
 
   /* --- Section labels: styled like terminal comments ---------------------- */
   /* Usage: <h2 class="section-label">EXPERIENCE</h2> → renders "// EXPERIENCE" */
   .section-label {
-    @apply text-terminal-green text-sm tracking-widest uppercase;
+    @apply text-terminal-accent text-sm tracking-widest uppercase;
   }
 
   .section-label::before {
@@ -70,17 +73,17 @@
 
   .prompt-list > li::before {
     content: '>';
-    @apply absolute left-0 text-terminal-green;
+    @apply absolute left-0 text-terminal-accent;
   }
 
   /* --- Status dots --------------------------------------------------------- */
-  /* green = active/current/earned, grey = past/completed, red = in progress */
+  /* accent (purple) = active/current/earned, grey = past/completed, red = in progress */
   .status-dot {
     @apply inline-block w-2 h-2 rounded-full align-middle;
   }
 
-  .status-dot-green {
-    @apply status-dot bg-terminal-green animate-pulse-dot;
+  .status-dot-accent {
+    @apply status-dot bg-terminal-accent animate-pulse-dot;
   }
 
   .status-dot-grey {
@@ -95,14 +98,14 @@
   /* Usage: <span class="cursor-blink"></span> after hero name/tagline */
   .cursor-blink::after {
     content: '|';
-    @apply text-terminal-green animate-blink;
+    @apply text-terminal-accent animate-blink;
   }
 
   /* --- Terminal prompt prefix ----------------------------------------------- */
   /* Usage: <span class="prompt-prefix"></span> → "jeff@rathgeberj:~$" */
   .prompt-prefix::before {
     content: 'jeff@rathgeberj:~$';
-    @apply text-terminal-green;
+    @apply text-terminal-accent;
   }
 
   /* --- Skill / tag badges ---------------------------------------------------- */
@@ -112,7 +115,7 @@
   }
 
   .tag-badge:hover {
-    @apply border-terminal-green text-terminal-green shadow-glow-green-sm;
+    @apply border-terminal-accent text-terminal-accent shadow-glow-accent-sm;
   }
 }
 

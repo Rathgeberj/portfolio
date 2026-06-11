@@ -6,7 +6,7 @@ Framework: Astro + Tailwind CSS
 Deployment: Netlify → rathgeberj.dev
 
 ## Design Principles
-- Terminal/OS desktop aesthetic — dark, green-on-black, monospace throughout
+- Terminal/OS desktop aesthetic — dark, purple-on-black UI with green matrix rain background, monospace throughout
 - Intuitive navigation for non-technical users — no CLI input required
 - All content data-driven from src/data/ — never hardcode content in components
 - Mobile responsive at all breakpoints
@@ -16,8 +16,9 @@ Deployment: Netlify → rathgeberj.dev
 - Surface: #111111
 - Border: #1f1f1f
 - Text primary: #e0e0e0
-- Green accent: #00ff41
-- Red accent: #ff3131
+- Purple accent (ALL UI: headers, borders, glows, links, nav highlights, status dots, typewriter): #9d00ff — Tailwind token `terminal.accent`
+- Matrix rain green (MatrixRain background canvas ONLY, never for UI): #00ff41 — Tailwind token `terminal.rain`
+- Red accent (errors, in-progress states; muted, no glow): #cc0000 — Tailwind token `terminal.red`
 - Muted text: #666666
 
 ## Font

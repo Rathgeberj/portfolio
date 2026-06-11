@@ -51,7 +51,7 @@ const modules = [
   {
     label: 'INTERESTS',
     href: '/interests',
-    preview: interests.map((i) => `${i.icon} ${i.name}`).join(' · '),
+    preview: interests.map((i) => i.name).join(' · '),
   },
   {
     label: 'CONTACT',
@@ -70,9 +70,9 @@ const lastLogin = new Date().toUTCString().replace('GMT', 'UTC');
     <span class="flex gap-1.5" aria-hidden="true">
       <span class="w-2.5 h-2.5 rounded-full bg-terminal-red/80"></span>
       <span class="w-2.5 h-2.5 rounded-full bg-terminal-muted/60"></span>
-      <span class="w-2.5 h-2.5 rounded-full bg-terminal-green/80"></span>
+      <span class="w-2.5 h-2.5 rounded-full bg-terminal-accent/80"></span>
     </span>
-    <span class="text-terminal-green">
+    <span class="text-terminal-accent">
       jeff@rathgeberj.dev<span class="cursor-blink" aria-hidden="true"></span>
     </span>
     <span class="ml-auto text-xs text-terminal-muted">last login: {lastLogin}</span>
@@ -90,9 +90,9 @@ const lastLogin = new Date().toUTCString().replace('GMT', 'UTC');
           modules.map((mod) => (
             <a href={mod.href} class="panel-interactive group block p-4">
               <div class="flex items-center justify-between">
-                <span class="text-terminal-green font-bold tracking-wide">[{mod.label}]</span>
+                <span class="text-terminal-accent font-bold tracking-wide">[{mod.label}]</span>
                 <span
-                  class="text-terminal-muted group-hover:text-terminal-green transition-colors duration-150"
+                  class="text-terminal-muted group-hover:text-terminal-accent transition-colors duration-150"
                   aria-hidden="true"
                 >
                   &gt;_

@@ -1,0 +1,110 @@
+---
+// Full-page matrix-rain background. Sits behind all content (negative z-index,
+// pointer-events disabled) at very low opacity so it adds depth without
+// competing with the foreground.
+//
+// Performance/accessibility notes:
+// - Frame work is throttled to ~11 updates/sec (STEP_MS) — calm pace, low CPU
+// - Canvas renders at 1x resolution regardless of devicePixelRatio; at 5%
+//   opacity the softness is invisible and it quarters the pixel work on phones
+// - Pauses entirely when the tab is hidden
+// - Disabled (and never started) under prefers-reduced-motion, including
+//   live changes to the preference
+---
+
+<canvas id="matrix-rain" aria-hidden="true"></canvas>
+
+<style>
+  #matrix-rain {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    opacity: 0.165;
+    pointer-events: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #matrix-rain {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  const canvas = document.getElementById('matrix-rain') as HTMLCanvasElement | null;
+  const ctx = canvas?.getContext('2d');
+
+  if (canvas && ctx) {
+    const FONT_SIZE = 16;
+    const STEP_MS = 90; // ~11 updates/sec — slow and calm, not the movie version
+    const TRAIL_FADE = 0.1; // per-step fade; higher = shorter trails
+    const GLYPHS = '01';
+
+    let drops: number[] = [];
+    let rafId = 0;
+    let lastStep = 0;
+
+    function resize() {
+      // 1x resolution on purpose — see component notes
+      canvas!.width = window.innerWidth;
+      canvas!.height = window.innerHeight;
+      const columns = Math.ceil(canvas!.width / FONT_SIZE);
+      // Stagger starting rows so columns don't fall in lockstep
+      drops = Array.from({ length: columns }, () =>
+        Math.floor((Math.random() * canvas!.height) / FONT_SIZE)
+      );
+      ctx!.fillStyle = '#0a0a0a';
+      ctx!.fillRect(0, 0, canvas!.width, canvas!.height);
+    }
+
+    function step() {
+      ctx!.fillStyle = `rgba(10, 10, 10, ${TRAIL_FADE})`;
+      ctx!.fillRect(0, 0, canvas!.width, canvas!.height);
+      ctx!.fillStyle = '#00ff41';
+      ctx!.font = `${FONT_SIZE}px "JetBrains Mono", monospace`;
+
+      for (let i = 0; i < drops.length; i++) {
+        const glyph = GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
+        ctx!.fillText(glyph, i * FONT_SIZE, drops[i] * FONT_SIZE);
+        if (drops[i] * FONT_SIZE > canvas!.height && Math.random() > 0.98) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+    }
+
+    function frame(now: number) {
+      if (now - lastStep >= STEP_MS) {
+        lastStep = now;
+        step();
+      }
+      rafId = requestAnimationFrame(frame);
+    }
+
+    function start() {
+      if (!rafId) rafId = requestAnimationFrame(frame);
+    }
+
+    function stop() {
+      cancelAnimationFrame(rafId);
+      rafId = 0;
+    }
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const shouldRun = () => !reduceMotion.matches && !document.hidden;
+    const sync = () => (shouldRun() ? start() : stop());
+
+    let resizeTimer = 0;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(resize, 150);
+    });
+    document.addEventListener('visibilitychange', sync);
+    reduceMotion.addEventListener('change', sync);
+
+    resize();
+    sync();
+  }
+</script>

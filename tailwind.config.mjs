@@ -10,8 +10,9 @@ export default {
           surface: '#111111',
           border: '#1f1f1f',
           text: '#e0e0e0',
-          green: '#00ff41',
-          red: '#ff3131',
+          accent: '#9d00ff',
+          rain: '#00ff41',
+          red: '#cc0000',
           muted: '#666666',
         },
       },
@@ -19,8 +20,8 @@ export default {
         mono: ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
       },
       boxShadow: {
-        'glow-green': '0 0 8px #00ff41',
-        'glow-green-sm': '0 0 4px rgba(0, 255, 65, 0.5)',
+        'glow-accent': '0 0 8px #9d00ff',
+        'glow-accent-sm': '0 0 4px rgba(157, 0, 255, 0.5)',
       },
       keyframes: {
         blink: {
@@ -28,8 +29,8 @@ export default {
           '50%, 100%': { opacity: '0' },
         },
         'pulse-dot': {
-          '0%, 100%': { opacity: '1', boxShadow: '0 0 4px #00ff41' },
-          '50%': { opacity: '0.4', boxShadow: '0 0 1px #00ff41' },
+          '0%, 100%': { opacity: '1', boxShadow: '0 0 4px #9d00ff' },
+          '50%': { opacity: '0.4', boxShadow: '0 0 1px #9d00ff' },
         },
         'fade-in': {
           from: { opacity: '0', transform: 'translateY(8px)' },
