@@ -1,0 +1,83 @@
+---
+// Education — cards, most recent first. Same centered column and card style
+// as /experience: in-progress degree gets the purple-tinted card + purple
+// accent bar, completed degrees get the dimmed card + grey bar.
+// All content comes from src/data/education.ts.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { education } from '../data/education';
+---
+
+<BaseLayout
+  title="education"
+  description="Education of Jeffrey Rathgeber Jr. — M.S. Cybersecurity (in progress) and B.S. Computer Science at NYU Tandon."
+>
+  <div class="max-w-[800px] mx-auto">
+    <h2 class="section-label">EDUCATION</h2>
+    <p class="mt-2 mb-8 text-sm text-terminal-muted">
+      <span class="text-terminal-accent">&gt;</span> cat education.log --reverse
+    </p>
+
+    <div class="space-y-12">
+      {
+        education.map((entry) => {
+          const inProgress = entry.status === 'in-progress';
+          return (
+            <article
+              class:list={[
+                'panel border-l-4 p-5 sm:p-6',
+                inProgress
+                  ? 'border-l-terminal-accent bg-terminal-surface-accent'
+                  : 'border-l-terminal-muted',
+              ]}
+            >
+              <div class="flex items-start gap-4">
+                {/* Institution logo placeholder: initials badge */}
+                <span
+                  class="flex h-12 w-12 shrink-0 items-center justify-center rounded-sm border border-terminal-border bg-terminal-bg text-sm font-bold text-terminal-accent"
+                  aria-hidden="true"
+                >
+                  {entry.initials}
+                </span>
+
+                <div>
+                  <h3 class="text-lg font-bold leading-snug text-terminal-accent">
+                    {entry.degree}
+                  </h3>
+                  {entry.minor && (
+                    <p class="mt-0.5 text-sm text-terminal-accent/70">{entry.minor}</p>
+                  )}
+                  <p class="mt-0.5 text-terminal-text">{entry.institution}</p>
+
+                  <p class="mt-2 flex flex-wrap items-center gap-x-2 text-xs text-terminal-muted">
+                    <span
+                      class={inProgress ? 'status-dot-accent' : 'status-dot-grey'}
+                      aria-hidden="true"
+                    />
+                    <span>{entry.dateRange}</span>
+                    <span aria-hidden="true">|</span>
+                    <span
+                      class:list={[
+                        'uppercase tracking-widest',
+                        inProgress ? 'text-terminal-accent' : 'text-terminal-muted',
+                      ]}
+                    >
+                      {inProgress ? 'in progress' : 'completed'}
+                    </span>
+                  </p>
+                </div>
+              </div>
+
+              {entry.notes && entry.notes.length > 0 && (
+                <ul class="prompt-list mt-4 text-sm text-terminal-text/90">
+                  {entry.notes.map((note) => (
+                    <li>{note}</li>
+                  ))}
+                </ul>
+              )}
+            </article>
+          );
+        })
+      }
+    </div>
+  </div>
+</BaseLayout>

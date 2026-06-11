@@ -14,6 +14,7 @@ Deployment: Netlify → rathgeberj.dev
 ## Color Tokens (use these, do not invent new colors)
 - Background: #0a0a0a
 - Surface: #111111
+- Surface accent-tinted (solid highlight for current/in-progress cards): #1f0f29 — Tailwind token `terminal.surface-accent`
 - Border: #1f1f1f
 - Text primary: #e0e0e0
 - Purple accent (ALL UI: headers, borders, glows, links, nav highlights, status dots, typewriter): #9d00ff — Tailwind token `terminal.accent`

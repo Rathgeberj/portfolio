@@ -8,6 +8,9 @@ export default {
         terminal: {
           bg: '#0a0a0a',
           surface: '#111111',
+          // solid equivalent of accent at 10% over surface — for highlighting
+          // current/in-progress cards without transparency
+          'surface-accent': '#1f0f29',
           border: '#1f1f1f',
           text: '#e0e0e0',
           accent: '#9d00ff',

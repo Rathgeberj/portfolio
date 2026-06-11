@@ -2,6 +2,8 @@
 
 export interface EducationEntry {
   degree: string;
+  /** Rendered as a smaller subheading under the degree */
+  minor?: string;
   institution: string;
   /** Short initials shown in the logo placeholder badge */
   initials: string;
@@ -20,7 +22,8 @@ export const education: EducationEntry[] = [
     notes: ['[PLACEHOLDER] Relevant coursework, honors, or notes'],
   },
   {
-    degree: 'B.S. Computer Science, Minor: Mathematics',
+    degree: 'B.S. Computer Science',
+    minor: 'Minor: Mathematics',
     institution: 'New York University, Tandon School of Engineering',
     initials: 'NYU',
     dateRange: '2020 – 2024',
