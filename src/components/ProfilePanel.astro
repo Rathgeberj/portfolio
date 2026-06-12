@@ -3,6 +3,8 @@
 // Typewriter subtitle cycles through the phrases below (vanilla JS, no libraries).
 // Visitors with prefers-reduced-motion see the first phrase statically.
 
+import { withBase } from '../utils/withBase';
+
 // [PLACEHOLDER] Taglines — to be updated
 const taglines = ['Cybersecurity Engineer', 'Graduate Researcher', 'Systems Thinker'];
 
@@ -28,7 +30,7 @@ const quickLinks = [
 <aside class="panel p-6 flex flex-col items-center text-center" aria-label="Profile">
   <!-- [PLACEHOLDER] profile photo — replace public/images/profile-placeholder.svg -->
   <img
-    src="/images/profile-placeholder.svg"
+    src={withBase('/images/profile-placeholder.svg')}
     alt="Profile photo of Jeffrey Rathgeber Jr. (placeholder)"
     width="144"
     height="144"

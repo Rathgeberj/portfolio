@@ -5,6 +5,7 @@ import tailwind from '@astrojs/tailwind';
 export default defineConfig({
   site: 'https://rathgeberj.dev',
   base: '/portfolio',
+  output: 'static',
   integrations: [
     tailwind({
       // global.css handles the Tailwind directives so base styles stay in one place

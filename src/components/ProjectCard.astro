@@ -5,6 +5,7 @@
 // solid accent-tinted surface used for "active" cards elsewhere.
 import SkillTag from './SkillTag.astro';
 import type { Project } from '../data/projects';
+import { withBase } from '../utils/withBase';
 
 interface Props {
   project: Project;
@@ -17,7 +18,7 @@ const hasDeepDive = Boolean(project.deepDive);
 {
   hasDeepDive ? (
     <a
-      href={`/projects/${project.slug}`}
+      href={withBase(`/projects/${project.slug}`)}
       class:list={[
         'panel-interactive group flex flex-col p-5',
         project.featured && 'bg-terminal-surface-accent',

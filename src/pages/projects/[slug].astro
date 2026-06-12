@@ -4,6 +4,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import SkillTag from '../../components/SkillTag.astro';
 import { projects } from '../../data/projects';
+import { withBase } from '../../utils/withBase';
 
 export function getStaticPaths() {
   return projects
@@ -18,7 +19,7 @@ const deepDive = project.deepDive!;
 <BaseLayout title={project.name} description={project.summary}>
   <div class="max-w-[800px] mx-auto">
     <p class="mb-6 text-sm">
-      <a href="/projects" class="text-terminal-muted hover:text-terminal-accent">
+      <a href={withBase('/projects')} class="text-terminal-muted hover:text-terminal-accent">
         <span class="text-terminal-accent">&gt;</span> cd ../projects
       </a>
     </p>
