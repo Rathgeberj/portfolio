@@ -19,7 +19,8 @@ const fullTitle = title === '~' ? 'rathgeberj.dev' : `${title} — rathgeberj.de
 // Absolute URLs for the canonical link and social-share cards.
 // Astro.site = https://rathgeberj.dev (from astro.config.mjs).
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const ogImageURL = new URL(withBase('/images/profile.jpg'), Astro.site);
+// Branded terminal "&gt;_" card — never the headshot (that stays on the homepage only).
+const ogImageURL = new URL(withBase('/images/og-card.png'), Astro.site);
 ---
 
 <!doctype html>
@@ -41,7 +42,7 @@ const ogImageURL = new URL(withBase('/images/profile.jpg'), Astro.site);
     <meta property="og:image" content={ogImageURL} />
 
     <!-- Twitter / X -->
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageURL} />
