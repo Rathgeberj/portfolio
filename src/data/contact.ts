@@ -15,8 +15,8 @@ export const contact: ContactItem[] = [
   },
   {
     label: 'linkedin',
-    value: 'linkedin.com/in/rathgeberjr',
-    url: 'https://www.linkedin.com/in/rathgeberjr/',
+    value: 'linkedin.com/in/rathgeberj',
+    url: 'https://www.linkedin.com/in/rathgeberj/',
   },
   {
     label: 'github',

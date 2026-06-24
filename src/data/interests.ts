@@ -6,12 +6,13 @@ export interface Interest {
 }
 
 export const interestsIntro =
-  'Beyond the terminal, a few things that keep the mind sharp and the curiosity alive.';
+  "Things I do when I'm not staring at a screen.";
 
 export const interests: Interest[] = [
   { name: 'Chess' },
   { name: 'Soccer' },
   { name: 'Reading' },
-  { name: 'Horology & Watch Collecting' },
-  // [PLACEHOLDER] Add more as desired
+  { name: 'Horology' },
+  { name: 'Weightlifting' },
+  { name: 'Poker' },
 ];
