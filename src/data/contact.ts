@@ -20,8 +20,8 @@ export const contact: ContactItem[] = [
   },
   {
     label: 'github',
-    value: 'github.com/Rathgeberj',
-    url: 'https://github.com/Rathgeberj',
+    value: 'github.com/rathgeberj',
+    url: 'https://github.com/rathgeberj',
   },
   {
     label: 'site',

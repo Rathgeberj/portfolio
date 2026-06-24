@@ -12,7 +12,7 @@ export interface ExperienceEntry {
 export const experience: ExperienceEntry[] = [
   {
     title: 'IT Infrastructure Intern',
-    organization: '[Company Name TBD]',
+    organization: 'Harvard Management Company',
     dateRange: 'June 2026 – Present',
     location: 'New York, NY',
     status: 'current',

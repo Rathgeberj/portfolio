@@ -5,13 +5,12 @@
 
 import { withBase } from '../utils/withBase';
 
-// [PLACEHOLDER] Taglines — to be updated
-const taglines = ['Cybersecurity Engineer', 'Graduate Researcher', 'Systems Thinker'];
+const taglines = ['M.S. Cybersecurity', 'B.S. Computer Science', 'IT Infrastructure'];
 
 const quickLinks = [
   {
     label: 'GitHub',
-    url: 'https://github.com/Rathgeberj',
+    url: 'https://github.com/rathgeberj',
     icon: 'M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.09.68-.22.68-.49 0-.24-.01-.88-.01-1.73-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.63.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.89 1.57 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.28 2.75 1.05a9.36 9.36 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.4.2 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.8-4.57 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.59.69.49A10.25 10.25 0 0 0 22 12.25C22 6.58 17.52 2 12 2Z',
   },
   {
@@ -28,13 +27,12 @@ const quickLinks = [
 ---
 
 <aside class="panel p-6 flex flex-col items-center text-center" aria-label="Profile">
-  <!-- [PLACEHOLDER] profile photo — replace public/images/profile-placeholder.svg -->
   <img
-    src={withBase('/images/profile-placeholder.svg')}
-    alt="Profile photo of Jeffrey Rathgeber Jr. (placeholder)"
+    src={withBase('/images/profile.jpg')}
+    alt="Professional headshot of Jeffrey Rathgeber Jr."
     width="144"
     height="144"
-    class="w-36 h-36 rounded-full ring-2 ring-terminal-accent/70 shadow-glow-accent-sm"
+    class="w-36 h-36 rounded-full object-cover object-[50%_15%] ring-2 ring-terminal-accent/70 shadow-glow-accent-sm"
   />
 
   <h1 class="mt-5 text-xl font-bold text-terminal-text">
@@ -47,11 +45,11 @@ const quickLinks = [
     ><span class="cursor-blink" aria-hidden="true"></span>
   </p>
 
-  <!-- [PLACEHOLDER] Bio — 2-3 sentences, to be updated -->
   <p class="mt-4 text-sm text-terminal-muted leading-relaxed">
-    Computer science graduate and cybersecurity master's student with hands-on IT and
-    security experience. Focused on infrastructure, automation, and applied security
-    research. [PLACEHOLDER]
+    M.S. Cybersecurity student at NYU Tandon and IT Infrastructure Intern at Harvard
+    Management Company. Focused on network security, IAM, infrastructure automation, and
+    AI security research. Always tinkering in the home lab and working toward the next
+    certification.
   </p>
 
   <ul class="mt-5 flex gap-4" aria-label="Quick links">
