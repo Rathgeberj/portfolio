@@ -16,7 +16,13 @@ import { withBase } from '../utils/withBase';
 const featured = projects.find((p) => p.featured);
 const earned = certifications.filter((c) => c.status === 'earned').length;
 const pursuing = certifications.filter((c) => c.status === 'in-progress').length;
-const skillSample = competencies[0].skills.slice(0, 4).join(', ');
+// Homepage teaser: Python first, then headline security skills (not just languages)
+const skillSample = [
+  competencies[0].skills[0],
+  'Threat Modeling',
+  'Network Security',
+  'Penetration Testing',
+].join(', ');
 
 const modules = [
   {

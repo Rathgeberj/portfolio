@@ -3,7 +3,7 @@
 ## Project Summary
 Personal cybersecurity portfolio for Jeffrey Rathgeber Jr.
 Framework: Astro + Tailwind CSS
-Deployment: Netlify → rathgeberj.dev
+Deployment: GitHub Actions → GitHub Pages (rathgeberj.dev)
 
 ## Design Principles
 - Terminal/OS desktop aesthetic — dark, purple-on-black UI with green matrix rain background, monospace throughout
@@ -39,5 +39,5 @@ Deployment: Netlify → rathgeberj.dev
 
 ## Deployment
 - `npm run build` → dist/
-- Deploy dist/ to Netlify
-- Domain: rathgeberj.dev (to be connected post-build)
+- Push to `main` → GitHub Actions builds and publishes to GitHub Pages (`.github/workflows/deploy.yml`)
+- Domain: rathgeberj.dev

@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
-  <!-- [PLACEHOLDER] Replace with a real profile photo (keep the same filename or update ProfilePanel) -->
-  <circle cx="100" cy="100" r="98" fill="#111111" stroke="#9d00ff" stroke-width="2"/>
-  <circle cx="100" cy="78" r="32" fill="#1f1f1f"/>
-  <path d="M40 168 a60 60 0 0 1 120 0" fill="#1f1f1f"/>
-  <text x="100" y="190" text-anchor="middle" font-family="monospace" font-size="11" fill="#666666">[PLACEHOLDER]</text>
-</svg>

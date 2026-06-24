@@ -5,6 +5,7 @@
 // All content comes from src/data/education.ts.
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { education } from '../data/education';
+import { withBase } from '../utils/withBase';
 ---
 
 <BaseLayout
@@ -22,9 +23,10 @@ import { education } from '../data/education';
         education.map((entry) => {
           const inProgress = entry.status === 'in-progress';
           return (
-            <article
+            <a
+              href={withBase(`/education/${entry.slug}`)}
               class:list={[
-                'panel border-l-4 p-5 sm:p-6',
+                'panel-interactive group block border-l-4 p-5 sm:p-6',
                 inProgress
                   ? 'border-l-terminal-accent bg-terminal-surface-accent'
                   : 'border-l-terminal-muted',
@@ -67,14 +69,10 @@ import { education } from '../data/education';
                 </div>
               </div>
 
-              {entry.notes && entry.notes.length > 0 && (
-                <ul class="prompt-list mt-4 text-sm text-terminal-text/90">
-                  {entry.notes.map((note) => (
-                    <li>{note}</li>
-                  ))}
-                </ul>
-              )}
-            </article>
+              <p class="mt-4 text-sm text-terminal-muted transition-colors group-hover:text-terminal-accent">
+                <span class="text-terminal-accent">&gt;</span> ls coursework/ ↗
+              </p>
+            </a>
           );
         })
       }

@@ -1,0 +1,96 @@
+---
+// Coursework detail page for one degree. A page is generated for every
+// education entry in src/data/education.ts. Lists relevant courses.
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { education } from '../../data/education';
+import { withBase } from '../../utils/withBase';
+
+export function getStaticPaths() {
+  return education.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const inProgress = entry.status === 'in-progress';
+const courses = entry.courses ?? [];
+---
+
+<BaseLayout
+  title={entry.degree}
+  description={`Relevant coursework for ${entry.degree} at ${entry.institution}.`}
+>
+  <div class="max-w-[800px] mx-auto">
+    <p class="mb-6 text-sm">
+      <a href={withBase('/education')} class="text-terminal-muted hover:text-terminal-accent">
+        <span class="text-terminal-accent">&gt;</span> cd ../education
+      </a>
+    </p>
+
+    <header
+      class:list={[
+        'panel border-l-4 p-5 sm:p-6',
+        inProgress
+          ? 'border-l-terminal-accent bg-terminal-surface-accent'
+          : 'border-l-terminal-muted',
+      ]}
+    >
+      <div class="flex items-start gap-4">
+        <span
+          class="flex h-12 w-12 shrink-0 items-center justify-center rounded-sm border border-terminal-border bg-terminal-bg text-sm font-bold text-terminal-accent"
+          aria-hidden="true"
+        >
+          {entry.initials}
+        </span>
+
+        <div>
+          <h1 class="text-xl font-bold leading-snug text-terminal-accent">{entry.degree}</h1>
+          {entry.minor && <p class="mt-0.5 text-sm text-terminal-accent/70">{entry.minor}</p>}
+          <p class="mt-0.5 text-terminal-text">{entry.institution}</p>
+
+          <p class="mt-2 flex flex-wrap items-center gap-x-2 text-xs text-terminal-muted">
+            <span
+              class={inProgress ? 'status-dot-accent' : 'status-dot-grey'}
+              aria-hidden="true"
+            />
+            <span>{entry.dateRange}</span>
+            <span aria-hidden="true">|</span>
+            <span
+              class:list={[
+                'uppercase tracking-widest',
+                inProgress ? 'text-terminal-accent' : 'text-terminal-muted',
+              ]}
+            >
+              {inProgress ? 'in progress' : 'completed'}
+            </span>
+          </p>
+        </div>
+      </div>
+    </header>
+
+    <section class="mt-10">
+      <h2 class="section-label">Relevant Coursework</h2>
+      <p class="mt-2 mb-6 text-sm text-terminal-muted">
+        <span class="text-terminal-accent">&gt;</span> ls ~/education/{entry.slug}/courses
+      </p>
+
+      {
+        courses.length > 0 ? (
+          <ul class="grid gap-3 sm:grid-cols-2">
+            {courses.map((course) => (
+              <li class="panel flex flex-col gap-1 p-4">
+                <span class="text-xs font-bold uppercase tracking-widest text-terminal-accent">
+                  {course.code}
+                </span>
+                <span class="text-sm text-terminal-text/90">{course.name}</span>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p class="text-sm text-terminal-muted">Coursework coming soon.</p>
+        )
+      }
+    </section>
+  </div>
+</BaseLayout>

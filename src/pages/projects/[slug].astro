@@ -27,8 +27,15 @@ const deepDive = project.deepDive!;
     <header class="panel border-l-4 border-l-terminal-accent p-5 sm:p-6">
       <h1 class="text-2xl font-bold leading-snug text-terminal-accent">{project.name}</h1>
       <p class="mt-1 text-xs text-terminal-muted">
-        {project.date} · {project.tags.map((t) => `[${t}]`).join(' ')}
+        {project.date}{project.tags.length > 0 && ` · ${project.tags.map((t) => `[${t}]`).join(' ')}`}
       </p>
+      {project.award && (
+        <p class="mt-3">
+          <span class="inline-flex items-center gap-2 rounded-sm border border-terminal-accent/60 bg-terminal-accent/10 px-2.5 py-1 text-xs font-bold uppercase tracking-widest text-terminal-accent shadow-glow-accent-sm">
+            <span aria-hidden="true">★</span> {project.award}
+          </span>
+        </p>
+      )}
       <p class="mt-3 text-sm leading-relaxed text-terminal-text/90">{project.summary}</p>
 
       <div class="mt-4 flex flex-wrap gap-1.5">

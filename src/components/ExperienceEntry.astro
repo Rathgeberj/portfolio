@@ -1,6 +1,8 @@
 ---
 // One job entry on /experience, rendered as a distinct card.
 // Left accent bar reinforces the timeline: purple = current role, grey = past.
+// Entries with a `roles` array render as a single company header followed by a
+// stacked promotion progression on a shared inner timeline.
 import type { ExperienceEntry } from '../data/experience';
 
 interface Props {
@@ -9,6 +11,7 @@ interface Props {
 
 const { entry } = Astro.props;
 const isCurrent = entry.status === 'current';
+const hasRoles = Boolean(entry.roles && entry.roles.length > 0);
 ---
 
 <article
@@ -19,28 +22,81 @@ const isCurrent = entry.status === 'current';
       : 'border-l-terminal-muted',
   ]}
 >
-  <h3 class="text-terminal-accent font-bold text-lg leading-snug">{entry.title}</h3>
-  <p class="mt-0.5 text-terminal-text">{entry.organization}</p>
+  {
+    hasRoles ? (
+      <>
+        {/* Company header */}
+        <h3 class="text-lg font-bold leading-snug text-terminal-accent">
+          {entry.organization}
+        </h3>
+        <p class="mt-2 flex flex-wrap items-center gap-x-2 text-xs text-terminal-muted">
+          <span
+            class={isCurrent ? 'status-dot-accent' : 'status-dot-grey'}
+            aria-hidden="true"
+          />
+          <span>{entry.dateRange}</span>
+          <span aria-hidden="true">|</span>
+          <span>{entry.location}</span>
+          <span aria-hidden="true">|</span>
+          <span
+            class:list={[
+              'uppercase tracking-widest',
+              isCurrent ? 'text-terminal-accent' : 'text-terminal-muted',
+            ]}
+          >
+            {isCurrent ? 'current' : 'past'}
+          </span>
+        </p>
 
-  <p class="mt-2 flex flex-wrap items-center gap-x-2 text-xs text-terminal-muted">
-    <span
-      class={isCurrent ? 'status-dot-accent' : 'status-dot-grey'}
-      aria-hidden="true"></span>
-    <span>{entry.dateRange}</span>
-    <span aria-hidden="true">|</span>
-    <span>{entry.location}</span>
-    <span aria-hidden="true">|</span>
-    <span
-      class:list={[
-        'uppercase tracking-widest',
-        isCurrent ? 'text-terminal-accent' : 'text-terminal-muted',
-      ]}
-    >
-      {isCurrent ? 'current' : 'past'}
-    </span>
-  </p>
+        {/* Stacked roles on a shared inner timeline */}
+        <ol class="mt-6 space-y-6 border-l border-terminal-border/70 pl-6">
+          {entry.roles!.map((role) => (
+            <li class="relative">
+              <span
+                class="absolute -left-[1.8rem] top-1.5 h-2.5 w-2.5 rounded-full border-2 border-terminal-bg bg-terminal-accent"
+                aria-hidden="true"
+              />
+              <h4 class="font-bold leading-snug text-terminal-accent">{role.title}</h4>
+              <p class="mt-1 text-xs text-terminal-muted">{role.dateRange}</p>
+              <ul class="prompt-list mt-3 text-sm text-terminal-text/90">
+                {role.bullets.map((bullet) => (
+                  <li>{bullet}</li>
+                ))}
+              </ul>
+            </li>
+          ))}
+        </ol>
+      </>
+    ) : (
+      <>
+        <h3 class="text-lg font-bold leading-snug text-terminal-accent">{entry.title}</h3>
+        <p class="mt-0.5 text-terminal-text">{entry.organization}</p>
 
-  <ul class="prompt-list mt-4 text-sm text-terminal-text/90">
-    {entry.bullets.map((bullet) => <li>{bullet}</li>)}
-  </ul>
+        <p class="mt-2 flex flex-wrap items-center gap-x-2 text-xs text-terminal-muted">
+          <span
+            class={isCurrent ? 'status-dot-accent' : 'status-dot-grey'}
+            aria-hidden="true"
+          />
+          <span>{entry.dateRange}</span>
+          <span aria-hidden="true">|</span>
+          <span>{entry.location}</span>
+          <span aria-hidden="true">|</span>
+          <span
+            class:list={[
+              'uppercase tracking-widest',
+              isCurrent ? 'text-terminal-accent' : 'text-terminal-muted',
+            ]}
+          >
+            {isCurrent ? 'current' : 'past'}
+          </span>
+        </p>
+
+        <ul class="prompt-list mt-4 text-sm text-terminal-text/90">
+          {entry.bullets!.map((bullet) => (
+            <li>{bullet}</li>
+          ))}
+        </ul>
+      </>
+    )
+  }
 </article>

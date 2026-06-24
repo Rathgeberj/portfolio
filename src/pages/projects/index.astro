@@ -15,7 +15,7 @@ import { projects } from '../../data/projects';
       <span class="text-terminal-accent">&gt;</span> ls ~/projects --sort=date
     </p>
 
-    <div class="grid gap-5 sm:grid-cols-2">
+    <div class="grid gap-5">
       {projects.map((project) => <ProjectCard project={project} />)}
     </div>
   </div>

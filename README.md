@@ -1,6 +1,6 @@
 # rathgeberj.dev
 
-Personal cybersecurity portfolio for Jeffrey Rathgeber Jr. — terminal/OS desktop aesthetic, built with [Astro](https://astro.build) and [Tailwind CSS](https://tailwindcss.com), deployed to Netlify.
+Personal cybersecurity portfolio for Jeffrey Rathgeber Jr. — terminal/OS desktop aesthetic, built with [Astro](https://astro.build) and [Tailwind CSS](https://tailwindcss.com), deployed to GitHub Pages at [rathgeberj.dev](https://rathgeberj.dev).
 
 ## Setup
 
@@ -49,8 +49,10 @@ Color tokens, fonts, and animations are defined in `tailwind.config.mjs` (under 
 
 ## Deployment
 
-```sh
-npm run build
-```
+Pushing to `main` triggers the GitHub Actions workflow (`.github/workflows/deploy.yml`), which builds the site and publishes `dist/` to GitHub Pages. Custom domain: `rathgeberj.dev`.
 
-Deploy `dist/` to Netlify. Domain: `rathgeberj.dev` (connected post-build).
+To build locally:
+
+```sh
+npm run build      # → dist/
+```

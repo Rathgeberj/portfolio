@@ -1,8 +1,8 @@
 ---
 // Summary card for one project on /projects.
-// Projects with a deepDive render as a link to /projects/[slug] with a
-// DEEP DIVE badge; the rest are static cards. Featured projects get the
-// solid accent-tinted surface used for "active" cards elsewhere.
+// The card itself is static; projects with a deepDive expose a dedicated
+// "View Deep Dive" button that links to /projects/[slug]. Featured projects
+// get the solid accent-tinted surface used for "active" cards elsewhere.
 import SkillTag from './SkillTag.astro';
 import type { Project } from '../data/projects';
 import { withBase } from '../utils/withBase';
@@ -15,47 +15,54 @@ const { project } = Astro.props;
 const hasDeepDive = Boolean(project.deepDive);
 ---
 
-{
-  hasDeepDive ? (
-    <a
-      href={withBase(`/projects/${project.slug}`)}
-      class:list={[
-        'panel-interactive group flex flex-col p-5',
-        project.featured && 'bg-terminal-surface-accent',
-      ]}
-    >
-      <div class="flex items-start justify-between gap-3">
-        <h3 class="font-bold leading-snug text-terminal-accent">{project.name}</h3>
-        <span class="shrink-0 rounded-sm border border-terminal-accent/60 px-1.5 py-0.5 text-[10px] uppercase tracking-widest text-terminal-accent">
-          deep dive
+<article
+  class:list={[
+    'panel flex flex-col p-5',
+    project.featured && 'bg-terminal-surface-accent',
+  ]}
+>
+  <h3 class="font-bold leading-snug text-terminal-accent">{project.name}</h3>
+  <p class="mt-1 text-xs text-terminal-muted">
+    {project.date}{project.tags.length > 0 && ` · ${project.tags.map((t) => `[${t}]`).join(' ')}`}
+  </p>
+
+  {
+    project.award && (
+      <p class="mt-3">
+        <span class="inline-flex items-center gap-2 rounded-sm border border-terminal-accent/60 bg-terminal-accent/10 px-2.5 py-1 text-xs font-bold uppercase tracking-widest text-terminal-accent shadow-glow-accent-sm">
+          <span aria-hidden="true">★</span> {project.award}
         </span>
+      </p>
+    )
+  }
+
+  <p class="mt-3 text-sm leading-relaxed text-terminal-text/90">{project.summary}</p>
+
+  {
+    (project.techStack.length > 0 || hasDeepDive) && (
+      <div class="mt-auto pt-4">
+        {project.techStack.length > 0 && (
+          <div class="flex flex-wrap gap-1.5">
+            {project.techStack.map((tech) => (
+              <SkillTag label={tech} />
+            ))}
+          </div>
+        )}
+        {hasDeepDive && (
+          <a
+            href={withBase(`/projects/${project.slug}`)}
+            class="group mt-4 inline-flex items-center gap-2 rounded-sm border border-terminal-accent/60 px-3 py-1.5 text-xs font-bold uppercase tracking-widest text-terminal-accent transition-all duration-150 hover:bg-terminal-accent/10 hover:shadow-glow-accent-sm focus-visible:bg-terminal-accent/10"
+          >
+            View Deep Dive
+            <span
+              class="transition-transform duration-150 group-hover:translate-x-0.5"
+              aria-hidden="true"
+            >
+              →
+            </span>
+          </a>
+        )}
       </div>
-      <p class="mt-1 text-xs text-terminal-muted">
-        {project.date} · {project.tags.map((t) => `[${t}]`).join(' ')}
-      </p>
-      <p class="mt-3 text-sm leading-relaxed text-terminal-text/90">{project.summary}</p>
-      {project.techStack.length > 0 && (
-        <div class="mt-auto flex flex-wrap gap-1.5 pt-4">
-          {project.techStack.map((tech) => (
-            <SkillTag label={tech} />
-          ))}
-        </div>
-      )}
-    </a>
-  ) : (
-    <article class="panel flex flex-col p-5">
-      <h3 class="font-bold leading-snug text-terminal-accent">{project.name}</h3>
-      <p class="mt-1 text-xs text-terminal-muted">
-        {project.date} · {project.tags.map((t) => `[${t}]`).join(' ')}
-      </p>
-      <p class="mt-3 text-sm leading-relaxed text-terminal-text/90">{project.summary}</p>
-      {project.techStack.length > 0 && (
-        <div class="mt-auto flex flex-wrap gap-1.5 pt-4">
-          {project.techStack.map((tech) => (
-            <SkillTag label={tech} />
-          ))}
-        </div>
-      )}
-    </article>
-  )
-}
+    )
+  }
+</article>
