@@ -49,4 +49,10 @@ export const certifications: Certification[] = [
     date: 'Pursuing',
     status: 'in-progress',
   },
+  {
+    name: 'CompTIA Security+',
+    organization: 'CompTIA',
+    date: 'Pursuing',
+    status: 'in-progress',
+  },
 ];
