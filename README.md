@@ -49,9 +49,24 @@ Color tokens, fonts, and animations are defined in `tailwind.config.mjs` (under 
 
 ## Security
 
-A Content-Security-Policy is emitted as a `<meta http-equiv>` tag on every page, configured under `security.csp` in `astro.config.mjs`. Astro auto-generates hashes for its inline scripts/styles on each build, so the policy never goes stale. The only external origin allowed is Google Fonts (`fonts.googleapis.com` / `fonts.gstatic.com`).
+This being a security portfolio, the site practices what it preaches — defense-in-depth across the application, the edge, and DNS:
 
-> **Adding a new external resource** (script, image CDN, embed, font, etc.) requires adding its origin to the matching directive in `security.csp`, or the browser will block it.
+**Application**
+- **Strict Content-Security-Policy** on every page (`default-src 'self'`, `object-src 'none'`, `base-uri 'self'`, `frame-ancestors 'none'`). The only external origin allowed is Google Fonts. Build-time hashes are generated for inline scripts/styles, so the policy can't drift out of sync with the code.
+- **No dynamic HTML sinks** — fully static, data-driven from `src/data/`; no `set:html`, no `eval`, no user input.
+- All outbound links use `rel="noopener noreferrer"`; CSP-compatible syntax highlighting (Prism, not inline-style Shiki).
+- Reproducible, lockfile-pinned CI installs; dependency tree kept on supported, regularly-updated releases with a clean `npm audit`.
+
+**Edge (Cloudflare)**
+- Origin served only through Cloudflare (origin IP not exposed), full HTTPS with HTTP→HTTPS redirect.
+- **TLS 1.2 minimum** (legacy TLS 1.0/1.1 refused), **HSTS**, and `X-Content-Type-Options: nosniff`.
+
+**DNS / email**
+- **DNSSEC** enabled end-to-end (validated chain of trust).
+- **CAA** records restricting which CAs may issue certificates.
+- **SPF + DMARC** configured to protect the domain against email spoofing.
+
+> **For contributors:** the CSP lives under `security.csp` in `astro.config.mjs`. Adding a new external resource (script, image CDN, embed, font, etc.) requires adding its origin to the matching directive there, or the browser will block it.
 
 ## Deployment
 

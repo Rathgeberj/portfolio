@@ -12,3 +12,6 @@ node_modules/
 # OS / editor
 .DS_Store
 Thumbs.db
+
+# private security notes — full config detail incl. rollout TODOs; never publish
+SECURITY.md

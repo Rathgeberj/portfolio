@@ -11,6 +11,15 @@ export interface Organization {
 
 export const organizations: Organization[] = [
   {
+    name: 'OSIRIS Lab — NYU Tandon',
+    role: 'Lab Member',
+    description:
+      'Offensive Security, Incident Response, and Internet Security laboratory is a student-run cybersecurity research lab where students analyze and understand how attackers take advantage of real systems.',
+    url: 'https://osiris.cyber.nyu.edu',
+    verificationUrl:
+      'https://osiris.cyber.nyu.edu/verify?id=osiris-2026-25459&name=Jeffrey%20Rathgeber',
+  },
+  {
     name: '(ISC)² — NYC & NJ Chapters',
     role: 'Member',
     description:
@@ -23,15 +32,6 @@ export const organizations: Organization[] = [
     description:
       'Global association for IT governance, audit, risk, and security professionals, known for the CISA, CISM, and CRISC certifications.',
     url: 'https://www.isaca.org',
-  },
-  {
-    name: 'OSIRIS Lab — NYU Tandon',
-    role: 'Lab Member',
-    description:
-      'Offensive Security, Incident Response, and Internet Security laboratory is a student-run cybersecurity research lab where students analyze and understand how attackers take advantage of real systems.',
-    url: 'https://osiris.cyber.nyu.edu',
-    verificationUrl:
-      'https://osiris.cyber.nyu.edu/verify?id=osiris-2026-25459&name=Jeffrey%20Rathgeber',
   },
   {
     name: 'Horological Society of New York',
