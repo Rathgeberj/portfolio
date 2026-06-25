@@ -11,8 +11,10 @@ export interface EducationEntry {
   /** URL slug for the coursework page at /education/[slug] */
   slug: string;
   degree: string;
-  /** Rendered as a smaller subheading under the degree */
+  /** Rendered as a smaller subheading under the degree (e.g. a minor or track) */
   minor?: string;
+  /** Optional expansion shown under `minor` on the coursework detail page only */
+  minorNote?: string;
   institution: string;
   /** Short initials shown in the logo placeholder badge */
   initials: string;
@@ -29,8 +31,11 @@ export const education: EducationEntry[] = [
     degree: 'M.S. Cybersecurity',
     institution: 'New York University, Tandon School of Engineering',
     initials: 'NYU',
-    dateRange: '2026 – 2027 (Expected)',
+    dateRange: '2026 – 2028 (Expected)',
     status: 'in-progress',
+    minor: 'Cyber Operations & Defense Tracks',
+    minorNote:
+      'Cyber Operations (CAE-CO) & Cyber Defense (CAE-CD) tracks recognized by the National Centers of Academic Excellence in Cybersecurity (NCAE-C).',
     courses: [
       { code: 'CS-GY 6573', name: 'Penetration Testing & Vulnerability Analysis' },
       { code: 'CS-GY 6083', name: 'Database Systems' },

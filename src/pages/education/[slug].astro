@@ -47,6 +47,11 @@ const courses = entry.courses ?? [];
         <div>
           <h1 class="text-xl font-bold leading-snug text-terminal-accent">{entry.degree}</h1>
           {entry.minor && <p class="mt-0.5 text-sm text-terminal-accent/70">{entry.minor}</p>}
+          {entry.minorNote && (
+            <p class="mt-1 max-w-prose text-xs leading-relaxed text-terminal-muted">
+              {entry.minorNote}
+            </p>
+          )}
           <p class="mt-0.5 text-terminal-text">{entry.institution}</p>
 
           <p class="mt-2 flex flex-wrap items-center gap-x-2 text-xs text-terminal-muted">
