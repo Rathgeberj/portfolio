@@ -5,9 +5,11 @@
    Color tokens are defined in tailwind.config.mjs (terminal.*).
    ========================================================================== */
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+/* Keep the design tokens (terminal.* colors, fonts, animations) in the existing
+   JS config rather than re-declaring them as v4 @theme — path is relative to this file. */
+@config '../../tailwind.config.mjs';
 
 @layer base {
   html {
@@ -32,7 +34,7 @@
 
   /* Visible focus ring for keyboard navigation */
   :focus-visible {
-    @apply outline-none ring-1 ring-terminal-accent;
+    @apply outline-hidden ring-1 ring-terminal-accent;
   }
 }
 
@@ -42,8 +44,9 @@
     @apply bg-terminal-surface border border-terminal-border rounded-sm;
   }
 
+  /* Mirrors .panel — Tailwind v4 @apply can't reference custom component classes */
   .panel-interactive {
-    @apply panel transition-all duration-200;
+    @apply bg-terminal-surface border border-terminal-border rounded-sm transition-all duration-200;
   }
 
   .panel-interactive:hover,
@@ -82,16 +85,17 @@
     @apply inline-block w-2 h-2 rounded-full align-middle;
   }
 
+  /* Each mirrors .status-dot — v4 @apply can't reference custom component classes */
   .status-dot-accent {
-    @apply status-dot bg-terminal-accent animate-pulse-dot;
+    @apply inline-block w-2 h-2 rounded-full align-middle bg-terminal-accent animate-pulse-dot;
   }
 
   .status-dot-grey {
-    @apply status-dot bg-terminal-muted;
+    @apply inline-block w-2 h-2 rounded-full align-middle bg-terminal-muted;
   }
 
   .status-dot-red {
-    @apply status-dot bg-terminal-red;
+    @apply inline-block w-2 h-2 rounded-full align-middle bg-terminal-red;
   }
 
   /* --- Blinking cursor ------------------------------------------------------ */

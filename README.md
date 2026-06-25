@@ -47,9 +47,15 @@ Placeholder content is marked with `[PLACEHOLDER]` or `[TBD]`.
 
 Color tokens, fonts, and animations are defined in `tailwind.config.mjs` (under `terminal.*`) and `src/styles/global.css`. Use the existing tokens — do not invent new colors. Reusable patterns: `.panel`, `.panel-interactive`, `.section-label`, `.prompt-list`, `.status-dot-{accent,grey,red}`, `.tag-badge`, `.cursor-blink`, `.scanlines`.
 
+## Security
+
+A Content-Security-Policy is emitted as a `<meta http-equiv>` tag on every page, configured under `security.csp` in `astro.config.mjs`. Astro auto-generates hashes for its inline scripts/styles on each build, so the policy never goes stale. The only external origin allowed is Google Fonts (`fonts.googleapis.com` / `fonts.gstatic.com`).
+
+> **Adding a new external resource** (script, image CDN, embed, font, etc.) requires adding its origin to the matching directive in `security.csp`, or the browser will block it.
+
 ## Deployment
 
-Pushing to `main` triggers the GitHub Actions workflow (`.github/workflows/deploy.yml`), which builds the site and publishes `dist/` to GitHub Pages. Custom domain: `rathgeberj.dev`.
+Pushing to `main` triggers the GitHub Actions workflow (`.github/workflows/deploy.yml`), which runs `npm ci` for a reproducible install, builds the site, and publishes `dist/` to GitHub Pages. Custom domain: `rathgeberj.dev`.
 
 To build locally:
 
